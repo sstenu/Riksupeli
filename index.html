@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Riksupeli</title>
+    <link rel="stylesheet" href="tyyli.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="ylaosa">
+        <div class="colum" id="napinColum1">
+            <button id="nappi" class="painike" onclick="nostaKortti()">Nosta kortti</button>
+        </div>
+        <div class="colum">  
+            <h1>Riksupeli</h1>
+            <p>Tervetuloa pelaamaan Riksupeliä.<br>
+                Aloita peli klikkaamalla Nosta kortti.<br>
+                Lue säännöt klikkaamalla Säännöt. </p>
+        </div>
+        <div class="colum" id="napinColum2">
+            <button id="saantonappi" class="painike" onclick="window.open('saannot.html', 'width=200, height=200')">Säännöt</button>
+        </div>
+    </div>
+    
+    <div id="alaosa">
+        <div id="kuva"><img id="korttiKuva" src=""></div>
+        <div id="alaosareuna"></div>
+        <div id="kortti"></div>
+        <div id="eteneminen"></div>
+    </div>
+    <div id="vikaOsa">
+        <p id="vikaTeksti">Peli päättyi. Jäikö jano? Aloita peli uudestaan.</p>
+        <button class="painike" id="uudestaanNappi" onclick="location.reload(); ">Uudestaan</button>
+    </div>
+
+<script>
+    var korttipakka = [1,1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,1,
+                        1,1];
+    var nostettu = 0;
+    
+
+    function nostaKortti(){
+
+        //tarkistaa onko peli päättynyt
+        if(nostettu==51){
+           peliPaattyi();   
+        };
+
+        //arpoo random luvun 1-52 välillä
+        var kortti = Math.floor(Math.random() * 52) + 1;
+
+        //tarkistaa onko kortti käytetty ja arpoo uuden kortin jos käytetty
+        while (korttipakka[kortti]==0){
+            kortti = Math.floor(Math.random() * 52) + 1;
+        };
+
+        //jos korttia ei ole käytetty palauttaa kortin
+        if (korttipakka[kortti] == 1){
+            korttipakka[kortti]= 0;
+            nostettu ++;
+            document.getElementById("alaosa").style.visibility = "visible";
+            naytaKortti(kortti);
+            naytaTeksti(kortti);
+            tulostaNumero(nostettu);
+        }; 
+
+    };
+
+    function naytaKortti(kortti){
+        var haettavaKortti = "muokatut/" + kortti + ".png";
+        document.getElementById("korttiKuva").src= haettavaKortti;
+    };
+
+    function naytaTeksti(kortti){
+        var haettavaTeksti= kortti;
+
+        if (haettavaTeksti==1 || haettavaTeksti==14 || haettavaTeksti==27 || haettavaTeksti==40){
+           document.getElementById("kortti").innerHTML="VESIPUTOUS<br>Kaikki aloittavat juomaan samaan aikaan. Kun kortin nostanut henkilö lopettaa juomisen, hänen vasemmalla puolella oleva henkilö saa lopettaa juomisen. Kun tämä puolestaan lopettaa juomisen, hänen vasemmalla puolella oleva henkilö saa lopettaa juomisen, jne."; 
+        } else if(haettavaTeksti==2 || haettavaTeksti==15 || haettavaTeksti==28 || haettavaTeksti==41){
+            document.getElementById("kortti").innerHTML="OTA 3 HUIKKAA";
+        } else if(haettavaTeksti==3 || haettavaTeksti==16 || haettavaTeksti==29 || haettavaTeksti==42){
+            document.getElementById("kortti").innerHTML="123<br>Kortin nostanut pelaaja juo 1 huikan, hänen vasemmallaan 2 huikkaa, sitä seuraava 3, seuraava 4 jne.";
+        } else if(haettavaTeksti==4 || haettavaTeksti==17 || haettavaTeksti==30 || haettavaTeksti==43){
+            document.getElementById("kortti").innerHTML="JAA 3 HUIKKAA<br>Voit jakaa yhdelle pelaajalle kaikki 3 tai jakaa potin monen osallistujan kesken.";
+        } else if(haettavaTeksti==5 || haettavaTeksti==31){
+            document.getElementById("kortti").innerHTML="MIEHET JUO<br>Kaikki miespelaajat juovat 3 huikkaa.";
+        } else if(haettavaTeksti== 18 || haettavaTeksti==44) {
+            document.getElementById("kortti").innerHTML="NAISET JUO<br>Kaikki naispelaajat juovat 3 huikkaa.";
+        } else if(haettavaTeksti==6 || haettavaTeksti==19 || haettavaTeksti==32 || haettavaTeksti==45){
+            document.getElementById("kortti").innerHTML="KATEGORIA<br>Kortin nostanut pelaaja valitsee kategorian, johon jokaisen pelaajan tulee tämän jälkeen omalla vuorollaan keksiä sana. Mikäli pelaaja ei keksi kategoriaan kuuluvaa sanaa, hän juo 3 huikkaa. Vuorojärjestys kulkee myötäpäivään.";
+        } else if(haettavaTeksti==7 || haettavaTeksti==20 || haettavaTeksti==33 || haettavaTeksti==46){
+            document.getElementById("kortti").innerHTML="RIKSU<br>Kuka huutaa viimeisenä riksu, juo 3 huikkaa.";
+        } else if(haettavaTeksti==8 || haettavaTeksti==21 || haettavaTeksti==34 || haettavaTeksti==47){
+            document.getElementById("kortti").innerHTML="EN OLE KOSKAAN / OLEN JOSKUS<br>Kortin nostanut pelaaja kertoo, mitä ei ole koskaan tehnyt tai vaihtoehtoisesti on joskus tehnyt. Kaikki pelaajat jotka ovat tehneet päinvastoin kuin kortin nostanut pelaaja juovat 3 huikkaa. ";
+        } else if(haettavaTeksti==9 || haettavaTeksti==22 || haettavaTeksti==35 || haettavaTeksti==48){
+            document.getElementById("kortti").innerHTML="SÄÄNTÖ<br>Kortin nostanut pelaa keksii säännön, jota kaikkien tulee noudattaa. Sääntörikkeestä joutuu juoda 3 huikkaa.";
+        } else if(haettavaTeksti==10 || haettavaTeksti==23 || haettavaTeksti==36 || haettavaTeksti==49){
+            document.getElementById("kortti").innerHTML="KYSYMYSMESTARI<br>Kortin nostaneen pelaajan kysymyksiin ei saa vastata. Mikäli joku pelaaja vastaa kysymysmestarille, pelaajan tulee juoda 3 huikkaa. Kysymysmestari vaihtuu, kun uusi kysymysmestari-kortti nostetaan";
+        } else if(haettavaTeksti==11 || haettavaTeksti==24 || haettavaTeksti==37 || haettavaTeksti==50){
+            document.getElementById("kortti").innerHTML="TAUKO<br>Vain taukokortin nostanut pelaaja saa pitää tauon pelistä. Kortin voi käyttää milloin vain pelin aikana.";
+        } else if(haettavaTeksti==12 || haettavaTeksti==25 || haettavaTeksti==38 || haettavaTeksti==51){
+            document.getElementById("kortti").innerHTML="ALAINEN<br>Kortin nostanut toimii kaikkien pelaajien alaisena. Hänen tulee siis juoda aina kun kuka vain muista pelaajista juo. Alainen vaihtuu, kun uusi alaiskortti nostetaan.";
+        } else if(haettavaTeksti==13 || haettavaTeksti==26 || haettavaTeksti==39 || haettavaTeksti==52){
+            document.getElementById("kortti").innerHTML="TARINA<br>Kortin nostanut pelaa aloittaa tarinan sanomalla sanan. Seuraava pelaaja hänen vasemmallaan toistaa äskeisen sanan ja lisää tarinaan uuden sanan. Tarinaa jatketaan niin kauan kunnes joku pelaajista ei muista tarinan kulkua.";
+        }
+
+    };
+
+    function tulostaNumero(nostettu){
+        var numero = nostettu;
+        document.getElementById("eteneminen").innerHTML= numero + "/52";
+
+    };
+    
+    function peliPaattyi(){
+        document.getElementById("alaosa").style.display="none"; 
+        document.getElementById("nappi").style.display="none";
+        document.getElementById("vikaOsa").style.visibility="visible";
+    
+    };
+</script>
+
+</body>
+</html> 
