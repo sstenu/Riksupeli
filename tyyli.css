@@ -25,6 +25,9 @@ body{
     align-items: center;
     border-color: midnightblue;
     border-style: solid;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 .ylaosa > .colum{
