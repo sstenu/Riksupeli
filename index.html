@@ -2,22 +2,24 @@
 <html>
 <head>
     <title>Riksupeli</title>
-    <link rel="stylesheet" href="tyyli.css">
+    <link rel="stylesheet" media="screen and (min-width: 550px)" href="tyyli.css">
+    <link rel="stylesheet" media="screen and (max-width: 549px)" href="tyylipieni.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="ylaosa">
-        <div class="colum" id="napinColum1">
-            <button id="nappi" class="painike" onclick="nostaKortti()">Nosta kortti</button>
+        <div class="colum" id="napinColum2">
+            <button id="saantonappi" class="painike" onclick="window.open('saannot.html', 'width=200, height=200')">Säännöt</button>
         </div>
         <div class="colum">  
             <h1>Riksupeli</h1>
             <p>Tervetuloa pelaamaan Riksupeliä.<br>
-                Aloita peli klikkaamalla Nosta kortti.<br>
-                Lue säännöt klikkaamalla Säännöt. </p>
+                Lue säännöt klikkaamalla Säännöt.<br>
+                Aloita peli klikkaamalla Nosta kortti.
+            </p>
         </div>
-        <div class="colum" id="napinColum2">
-            <button id="saantonappi" class="painike" onclick="window.open('saannot.html', 'width=200, height=200')">Säännöt</button>
+        <div class="colum" id="napinColum1">
+            <button id="nappi" class="painike" onclick="nostaKortti()">Nosta kortti</button>
         </div>
     </div>
     

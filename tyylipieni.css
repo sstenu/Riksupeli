@@ -1,3 +1,4 @@
+
 body{
     background-color: rgb(86, 168, 86);
 }
@@ -19,12 +20,12 @@ body{
 
 .ylaosa{
     text-align: center;
-    display: flex;
     background-color: white;
-    justify-content: center;
     align-items: center;
     border-color: midnightblue;
     border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .ylaosa > .colum{
@@ -36,9 +37,8 @@ body{
 }
 
 #kuva{
-    float: left;
-    width: 60%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 img{
@@ -46,19 +46,10 @@ img{
     margin-left: auto;
     margin-right: auto;
     display: block;
-    max-width: 100%;
-}
-
-#alaosareuna{
-    float: left;
-    visibility: hidden;
-    margin-top: 170px;
-    width: 40%; 
+    max-width: 50%;
 }
 
 #kortti {
-    float: left;
-    width: 30%;
     text-align: center; 
     background-color: white;
     border-left-style: solid;
@@ -68,8 +59,6 @@ img{
 }
 
 #eteneminen{
-    float: left;
-    width: 30%;
     text-align: center;
     background-color: white;
     border-left-style: solid;
